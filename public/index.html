@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wàańu Magalu Xassida Yi Paris 2026 — Commander</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    .page-wrapper { background: none; }
+    .star-divider { display: flex; align-items: center; gap: 10px; margin: 0 0 24px; }
+    .star-divider::before, .star-divider::after { content: ''; flex: 1; height: 1px; background: linear-gradient(to right, transparent, #e8f0f8); }
+    .star-divider::after { background: linear-gradient(to left, transparent, #e8f0f8); }
+    .input-icon-wrapper { position: relative; }
+    .input-icon { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); color: #b0c4d8; font-size: 0.9rem; pointer-events: none; }
+    .input-icon-wrapper .form-input { padding-left: 44px; }
+    .form-footer { text-align: center; margin-top: 20px; font-size: 0.8rem; color: var(--text-muted); }
+    .form-footer a { color: var(--primary); text-decoration: none; font-weight: 600; }
+    .form-footer a:hover { text-decoration: underline; }
+    .event-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: rgba(240, 165, 0, 0.15); color: var(--accent);
+      border: 1px solid rgba(240, 165, 0, 0.3);
+      padding: 6px 14px; border-radius: 20px;
+      font-size: 0.8rem; font-weight: 600; margin-top: 8px; margin-bottom: 4px;
+    }
+  </style>
+</head>
+<body>
+  <!-- Background shapes -->
+  <div class="bg-shape"></div>
+  <div class="bg-shape"></div>
+  <div class="bg-shape"></div>
+
+  <div class="page-wrapper">
+    <div class="card guest-card">
+
+      <!-- Logo section -->
+      <div class="logo-section" id="logoSection">
+        <div class="logo-wrapper" id="logoWrapper">
+          <img id="logoImg" class="logo-img" src="" alt="Logo" style="display:none;">
+          <svg id="logoDefault" class="logo-svg-default" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="g1" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" style="stop-color:#195b90"/>
+                <stop offset="100%" style="stop-color:#0a375b"/>
+              </linearGradient>
+              <linearGradient id="g2" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" style="stop-color:#f0a500"/>
+                <stop offset="100%" style="stop-color:#ffcc44"/>
+              </linearGradient>
+            </defs>
+            <!-- Crescent moon -->
+            <circle cx="45" cy="50" r="30" fill="url(#g2)"/>
+            <circle cx="56" cy="42" r="24" fill="white"/>
+            <!-- Stars -->
+            <polygon points="75,18 77,24 83,24 78,28 80,34 75,30 70,34 72,28 67,24 73,24" fill="url(#g2)"/>
+            <polygon points="85,55 86,59 90,59 87,62 88,66 85,63 82,66 83,62 80,59 84,59" fill="url(#g2)" opacity="0.7"/>
+          </svg>
+        </div>
+        <h1 class="logo-title">Wàańu Magalu Xassida Yi</h1>
+        <div class="event-badge"><i class="fas fa-map-marker-alt"></i> Paris 2026</div>
+      </div>
+
+      <!-- Form / Success section -->
+      <div id="formContainer">
+        <div class="form-section">
+          <h2 class="form-title">Passer une commande</h2>
+          <p class="form-desc">Remplissez le formulaire ci-dessous pour transmettre votre commande à nos cuisiniers.</p>
+
+          <div class="star-divider">✦</div>
+
+          <form id="orderForm">
+            <div class="form-group">
+              <label class="form-label" for="name"><i class="fas fa-user"></i>&nbsp; Nom complet</label>
+              <div class="input-icon-wrapper">
+                <i class="fas fa-user input-icon"></i>
+                <input
+                  class="form-input"
+                  type="text"
+                  id="name"
+                  name="name"
+                  placeholder="Votre nom et prénom"
+                  required
+                  autocomplete="name"
+                >
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="phone"><i class="fas fa-phone"></i>&nbsp; Numéro de téléphone</label>
+              <div class="input-icon-wrapper">
+                <i class="fas fa-phone input-icon"></i>
+                <input
+                  class="form-input"
+                  type="tel"
+                  id="phone"
+                  name="phone"
+                  placeholder="+33 6 00 00 00 00"
+                  required
+                  autocomplete="tel"
+                >
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="message"><i class="fas fa-utensils"></i>&nbsp; Votre commande</label>
+              <textarea
+                class="form-textarea"
+                id="message"
+                name="message"
+                placeholder="Décrivez votre commande (plat, quantité, préférences alimentaires...)"
+                required
+              ></textarea>
+            </div>
+
+            <div id="formAlert" class="alert"></div>
+
+            <button type="submit" class="btn btn-primary" id="submitBtn">
+              <i class="fas fa-paper-plane"></i>
+              Envoyer ma commande
+            </button>
+          </form>
+
+          <div class="form-footer">
+            Vous êtes cuisinier ou responsable ?
+            <a href="/login.html">Se connecter ici</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Success state -->
+      <div id="successContainer" class="success-overlay">
+        <div class="success-icon">✅</div>
+        <h2 class="success-title">Commande envoyée !</h2>
+        <p class="success-text">
+          Votre commande a bien été transmise à nos cuisiniers.<br>
+          Ils s'en occupent dès que possible. Merci pour votre patience !
+        </p>
+        <button class="btn btn-primary" onclick="resetForm()" style="max-width: 250px;">
+          <i class="fas fa-plus"></i> Nouvelle commande
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="/js/app.js"></script>
+</body>
+</html>

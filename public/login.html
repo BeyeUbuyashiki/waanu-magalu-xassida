@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Connexion — Wàańu Magalu Xassida Yi Paris 2026</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    .input-icon-wrapper { position: relative; }
+    .input-icon { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); color: #b0c4d8; font-size: 0.9rem; pointer-events: none; }
+    .input-icon-wrapper .form-input { padding-left: 44px; }
+    .toggle-password { position: absolute; right: 14px; top: 50%; transform: translateY(-50%); background: none; border: none; color: #b0c4d8; cursor: pointer; padding: 4px; font-size: 0.9rem; }
+    .toggle-password:hover { color: var(--primary); }
+    .back-link { text-align: center; margin-top: 20px; font-size: 0.8rem; color: var(--text-muted); }
+    .back-link a { color: var(--primary); text-decoration: none; font-weight: 600; }
+    .back-link a:hover { text-decoration: underline; }
+    .login-info {
+      background: linear-gradient(135deg, rgba(25,91,144,0.08), rgba(10,55,91,0.05));
+      border: 1px solid rgba(25,91,144,0.15);
+      border-radius: var(--radius-sm);
+      padding: 14px 18px;
+      margin-bottom: 24px;
+      font-size: 0.82rem;
+      color: var(--primary);
+      line-height: 1.6;
+    }
+    .login-info strong { font-weight: 700; }
+  </style>
+</head>
+<body>
+  <div class="bg-shape"></div>
+  <div class="bg-shape"></div>
+  <div class="bg-shape"></div>
+
+  <div class="page-wrapper">
+    <div class="card login-card">
+
+      <div class="logo-section">
+        <div class="logo-wrapper" style="cursor:default;">
+          <img id="logoImg" class="logo-img" src="" alt="Logo" style="display:none;">
+          <svg id="logoDefault" class="logo-svg-default" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="g1" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" style="stop-color:#195b90"/>
+                <stop offset="100%" style="stop-color:#0a375b"/>
+              </linearGradient>
+              <linearGradient id="g2" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" style="stop-color:#f0a500"/>
+                <stop offset="100%" style="stop-color:#ffcc44"/>
+              </linearGradient>
+            </defs>
+            <circle cx="45" cy="50" r="30" fill="url(#g2)"/>
+            <circle cx="56" cy="42" r="24" fill="white"/>
+            <polygon points="75,18 77,24 83,24 78,28 80,34 75,30 70,34 72,28 67,24 73,24" fill="url(#g2)"/>
+            <polygon points="85,55 86,59 90,59 87,62 88,66 85,63 82,66 83,62 80,59 84,59" fill="url(#g2)" opacity="0.7"/>
+          </svg>
+        </div>
+        <h1 class="logo-title">Wàańu Magalu Xassida Yi</h1>
+        <p class="logo-subtitle">Paris 2026</p>
+      </div>
+
+      <div class="form-section">
+        <h2 class="form-title">Connexion</h2>
+        <p class="form-desc">Accès réservé aux cuisiniers et à l'administrateur.</p>
+
+        <div class="login-info">
+          <i class="fas fa-info-circle"></i>&nbsp;
+          Première connexion ? Identifiant : <strong>admin</strong> — Mot de passe : <strong>admin2026</strong>
+        </div>
+
+        <form id="loginForm">
+          <div class="form-group">
+            <label class="form-label" for="username">Identifiant</label>
+            <div class="input-icon-wrapper">
+              <i class="fas fa-user input-icon"></i>
+              <input
+                class="form-input"
+                type="text"
+                id="username"
+                name="username"
+                placeholder="Votre identifiant"
+                required
+                autocomplete="username"
+                autofocus
+              >
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="password">Mot de passe</label>
+            <div class="input-icon-wrapper">
+              <i class="fas fa-lock input-icon"></i>
+              <input
+                class="form-input"
+                type="password"
+                id="password"
+                name="password"
+                placeholder="••••••••"
+                required
+                autocomplete="current-password"
+                style="padding-right: 44px;"
+              >
+              <button type="button" class="toggle-password" id="togglePwd" title="Afficher/masquer le mot de passe">
+                <i class="fas fa-eye" id="eyeIcon"></i>
+              </button>
+            </div>
+          </div>
+
+          <div id="loginAlert" class="alert"></div>
+
+          <button type="submit" class="btn btn-primary" id="loginBtn" style="margin-top: 8px;">
+            <i class="fas fa-sign-in-alt"></i>
+            Se connecter
+          </button>
+        </form>
+
+        <div class="back-link">
+          <a href="/"><i class="fas fa-arrow-left"></i> Retour au formulaire de commande</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="/js/login.js"></script>
+</body>
+</html>

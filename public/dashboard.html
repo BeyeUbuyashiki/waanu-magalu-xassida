@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tableau de bord — Wàańu Magalu Xassida Yi Paris 2026</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    body { background: #f0f5fb; }
+    body::before { display: none; }
+    .input-icon-wrapper { position: relative; }
+    .input-icon { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); color: #b0c4d8; font-size: 0.9rem; pointer-events: none; }
+    .input-icon-wrapper .form-input { padding-left: 44px; }
+  </style>
+</head>
+<body class="dashboard-body">
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <img id="navLogoImg" class="navbar-logo" src="" alt="Logo" style="display:none;">
+      <svg id="navLogoDefault" class="navbar-logo-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="g2" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#f0a500"/>
+            <stop offset="100%" style="stop-color:#ffcc44"/>
+          </linearGradient>
+        </defs>
+        <circle cx="45" cy="50" r="30" fill="url(#g2)"/>
+        <circle cx="56" cy="42" r="24" fill="#195b90"/>
+        <polygon points="75,18 77,24 83,24 78,28 80,34 75,30 70,34 72,28 67,24 73,24" fill="url(#g2)"/>
+        <polygon points="85,55 86,59 90,59 87,62 88,66 85,63 82,66 83,62 80,59 84,59" fill="url(#g2)" opacity="0.7"/>
+      </svg>
+      <div class="navbar-title">
+        Wàańu Magalu Xassida Yi
+        <span>Paris 2026</span>
+      </div>
+    </div>
+
+    <div class="navbar-tabs" id="navTabs">
+      <button class="nav-tab active" onclick="showTab('orders')" id="tabOrders">
+        <i class="fas fa-list-alt"></i> Commandes
+      </button>
+      <button class="nav-tab" onclick="showTab('admin')" id="tabAdmin" style="display:none;">
+        <i class="fas fa-cog"></i> Administration
+      </button>
+    </div>
+
+    <div class="navbar-right">
+      <div class="live-badge" title="Actualisation automatique toutes les 10s">
+        <div class="pulse-dot"></div> EN DIRECT
+      </div>
+      <div class="user-badge">
+        <div class="user-avatar" id="userAvatar">?</div>
+        <span id="userDisplayName" style="display:none; font-size:0.85rem;"></span>
+      </div>
+      <button class="btn-logout" onclick="logout()">
+        <i class="fas fa-sign-out-alt"></i> Déconnexion
+      </button>
+    </div>
+  </nav>
+
+  <div class="dashboard-main">
+
+    <!-- ── COMMANDES TAB ───────────────────────────────────────── -->
+    <div id="ordersSection">
+
+      <!-- Stats -->
+      <div class="stats-grid" id="statsGrid">
+        <div class="stat-card">
+          <div class="stat-icon total"><span style="font-size:1.4rem;">📋</span></div>
+          <div>
+            <div class="stat-value" id="statTotal">—</div>
+            <div class="stat-label">Total commandes</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon pending"><span style="font-size:1.4rem;">📥</span></div>
+          <div>
+            <div class="stat-value" id="statPending">—</div>
+            <div class="stat-label">En charge</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon in-progress"><span style="font-size:1.4rem;">🍳</span></div>
+          <div>
+            <div class="stat-value" id="statInProgress">—</div>
+            <div class="stat-label">En cours</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon done"><span style="font-size:1.4rem;">✅</span></div>
+          <div>
+            <div class="stat-value" id="statDone">—</div>
+            <div class="stat-label">Traitées</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Kanban board -->
+      <div class="kanban-board">
+
+        <!-- En charge -->
+        <div class="kanban-column">
+          <div class="column-header en-charge">
+            <span><i class="fas fa-inbox"></i>&nbsp; En charge</span>
+            <span class="column-count" id="countEnCharge">0</span>
+          </div>
+          <div class="column-body" id="colEnCharge">
+            <div class="empty-state">
+              <div class="empty-icon">📭</div>
+              Aucune commande en attente
+            </div>
+          </div>
+        </div>
+
+        <!-- En cours -->
+        <div class="kanban-column">
+          <div class="column-header en-cours">
+            <span><i class="fas fa-fire"></i>&nbsp; En cours</span>
+            <span class="column-count" id="countEnCours">0</span>
+          </div>
+          <div class="column-body" id="colEnCours">
+            <div class="empty-state">
+              <div class="empty-icon">🍳</div>
+              Aucune commande en préparation
+            </div>
+          </div>
+        </div>
+
+        <!-- Traitée -->
+        <div class="kanban-column">
+          <div class="column-header traitee">
+            <span><i class="fas fa-check-circle"></i>&nbsp; Traitée</span>
+            <span class="column-count" id="countTraitee">0</span>
+          </div>
+          <div class="column-body" id="colTraitee">
+            <div class="empty-state">
+              <div class="empty-icon">🎉</div>
+              Aucune commande traitée
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ── ADMIN TAB ───────────────────────────────────────────── -->
+    <div id="adminSection" class="admin-section">
+
+      <div class="admin-grid">
+
+        <!-- Add cook -->
+        <div class="admin-card">
+          <div class="admin-card-header">
+            <h3><i class="fas fa-user-plus"></i>&nbsp; Ajouter un cuisinier</h3>
+            <p>Créer un accès pour un cuisinier</p>
+          </div>
+          <div class="admin-card-body">
+            <form id="addCookForm">
+              <div class="form-group">
+                <label class="form-label">Identifiant</label>
+                <div class="input-icon-wrapper">
+                  <i class="fas fa-user input-icon"></i>
+                  <input class="form-input" type="text" id="cookUsername" placeholder="ex: cuisinier1" required>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Mot de passe</label>
+                <div class="input-icon-wrapper">
+                  <i class="fas fa-lock input-icon"></i>
+                  <input class="form-input" type="text" id="cookPassword" placeholder="Min. 6 caractères" required>
+                </div>
+              </div>
+              <div id="addCookAlert" class="alert"></div>
+              <button type="submit" class="btn btn-primary">
+                <i class="fas fa-plus"></i> Ajouter
+              </button>
+            </form>
+          </div>
+        </div>
+
+        <!-- Cook list -->
+        <div class="admin-card">
+          <div class="admin-card-header">
+            <h3><i class="fas fa-users"></i>&nbsp; Cuisiniers actifs</h3>
+            <p>Gérer les comptes cuisiniers</p>
+          </div>
+          <div class="admin-card-body">
+            <div id="cookList">
+              <div style="text-align:center; color: var(--text-muted); padding: 30px; font-size:0.875rem;">
+                <i class="fas fa-spinner fa-spin"></i> Chargement...
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Logo upload -->
+        <div class="admin-card">
+          <div class="admin-card-header">
+            <h3><i class="fas fa-image"></i>&nbsp; Logo de l'événement</h3>
+            <p>Modifier le logo affiché sur toutes les pages</p>
+          </div>
+          <div class="admin-card-body">
+            <div
+              class="logo-upload-area"
+              id="logoDropArea"
+              onclick="document.getElementById('logoFileInput').click()"
+            >
+              <div class="upload-icon">🖼️</div>
+              <p><strong>Cliquez ou glissez</strong> une image ici</p>
+              <p style="margin-top:6px; font-size:0.75rem;">JPG, PNG, SVG, WebP — max 5 Mo</p>
+              <img id="logoPreviewImg" class="logo-preview" src="" alt="Prévisualisation">
+            </div>
+            <input type="file" id="logoFileInput" accept="image/*" style="display:none;">
+            <div id="logoUploadAlert" class="alert" style="margin-top:12px;"></div>
+            <button class="btn btn-primary" id="uploadLogoBtn" onclick="uploadLogo()" style="margin-top:14px; display:none;">
+              <i class="fas fa-upload"></i> Mettre à jour le logo
+            </button>
+          </div>
+        </div>
+
+        <!-- Stats card -->
+        <div class="admin-card">
+          <div class="admin-card-header">
+            <h3><i class="fas fa-chart-bar"></i>&nbsp; Statistiques</h3>
+            <p>Vue d'ensemble des commandes</p>
+          </div>
+          <div class="admin-card-body" id="adminStatsBody">
+            <div style="text-align:center; color: var(--text-muted); padding: 30px; font-size:0.875rem;">
+              <i class="fas fa-spinner fa-spin"></i> Chargement...
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Toast container -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- Delete confirm modal -->
+  <div class="modal-overlay" id="deleteModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3><i class="fas fa-trash"></i>&nbsp; Supprimer la commande</h3>
+        <button class="modal-close" onclick="closeDeleteModal()">✕</button>
+      </div>
+      <div class="modal-body">
+        <p style="color: var(--text-muted); margin-bottom: 20px;">
+          Êtes-vous sûr de vouloir supprimer cette commande ? Cette action est irréversible.
+        </p>
+        <div style="display:flex; gap:10px; justify-content:flex-end;">
+          <button class="btn btn-sm" onclick="closeDeleteModal()" style="background:#f1f5f9; color: var(--text);">
+            Annuler
+          </button>
+          <button class="btn btn-sm btn-danger" id="confirmDeleteBtn">
+            <i class="fas fa-trash"></i> Supprimer
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="/js/dashboard.js"></script>
+</body>
+</html>
